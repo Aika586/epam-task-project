@@ -21,7 +21,7 @@ The primary goals of this repository are:
 
 ## ✅ Test Scenarios
 
-This repository includes eight (8) Gherkin test cases covering essential functionalities of the website:
+This repository includes ten (10) Gherkin test cases covering essential functionalities of the website:
 
 1. **User Registration**
 2. **User Login**
