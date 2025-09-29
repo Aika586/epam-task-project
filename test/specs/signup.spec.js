@@ -49,7 +49,7 @@ describe("Sign up Tests", () => {
       const emailField = await $("#email");
       await browser.waitUntil(
         async () => (await emailField.getAttribute("aria-invalid")) === "true",
-        { timeout: 5000, timeoutMsg: "Email aria-invalid not set" }
+        { timeout: 3000, timeoutMsg: "Email aria-invalid not set" }
       );
       await expect(emailField).toHaveAttribute("aria-invalid", "true");
     });
@@ -105,7 +105,7 @@ describe("Sign up Tests", () => {
           async () => (await field.getAttribute("aria-invalid")) === "true",
           {
             timeout: 3000,
-            timeoutMsg: "aria-invalid не появился на одном из инпутов",
+            timeoutMsg: "Email aria-invalid not set",
           }
         );
 
