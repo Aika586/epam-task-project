@@ -10,7 +10,7 @@ describe("Login Tests", () => {
 
   describe("successfully login", () => {
     beforeEach(async () => {
-      await LoginPage.login("baatirbekovna.6@mail.ru", "Baatirbekovna_1989");
+      await LoginPage.login("aika18@gmail.com", "Aika_1989");
     });
 
     it("should be redirected to my account page", async () => {

@@ -1,5 +1,5 @@
 import SignUpPage from "../pageobjects/signUp.page";
-import { expect, browser, $$,$ } from "@wdio/globals";
+import { expect, browser, $$, $ } from "@wdio/globals";
 
 describe("Sign up Tests", () => {
   beforeEach(async () => {
@@ -8,7 +8,7 @@ describe("Sign up Tests", () => {
 
   describe("Successful sign up", () => {
     beforeEach(async () => {
-      await SignUpPage.signUp("urmataika18@gmail.com", "Aikokul_1998");
+      await SignUpPage.signUp("aika18@gmail.com", "Aika_1989");
     });
 
     it("I should see a confirmation  alert message 'Account created successfully'", async () => {
@@ -48,10 +48,15 @@ describe("Sign up Tests", () => {
     it("the email field should be highlighted", async () => {
       const emailField = await $("#email");
       await browser.waitUntil(
-        async () => (await emailField.getAttribute("aria-invalid")) === "true",
+        async () => {
+          const className = await emailField.getAttribute("class");
+          return className && className.indexOf("is-invalid") !== -1;
+        },
         { timeout: 3000, timeoutMsg: "Email aria-invalid not set" }
       );
-      await expect(emailField).toHaveAttribute("aria-invalid", "true");
+      await expect(emailField).toHaveElementClass(
+        expect.stringContaining("is-invalid")
+      );
     });
 
     it("my account should not be created", async () => {
@@ -64,7 +69,7 @@ describe("Sign up Tests", () => {
 
   describe("Email is already registered", () => {
     beforeEach(async () => {
-      await SignUpPage.signUp("urmataika18@gmail.com", "Password1265!");
+      await SignUpPage.signUp("aika18@gmail.com", "Aika_1989");
     });
 
     it("I should see a duplicate account error message", async () => {
@@ -102,14 +107,20 @@ describe("Sign up Tests", () => {
 
       for (const field of fields) {
         await browser.waitUntil(
-          async () => (await field.getAttribute("aria-invalid")) === "true",
+          async () => {
+            const className = await field.getAttribute("class");
+            return className && className.indexOf("is-invalid") !== -1;
+          },
           {
             timeout: 3000,
-            timeoutMsg: "Email aria-invalid not set",
+            timeoutMsg:
+              "Expected input to be highlighted is-invalid, but it was not",
           }
         );
 
-        await expect(field).toHaveAttribute("aria-invalid", "true");
+        await expect(field).toHaveElementClass(
+          expect.stringContaining("is-invalid")
+        );
       }
     });
     it("I should remain on the signup page", async () => {
