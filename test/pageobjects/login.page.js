@@ -15,7 +15,7 @@ export class LoginPage {
   }
 
    get loginErrorMessage() {
-    return $("//div[@data-test='login-error']//div");
+    return $("//div[@data-test='login-error']");
   }
   get missingFieldError() {
     return  $$("//div[@data-test]");
