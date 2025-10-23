@@ -16,11 +16,6 @@ describe("Sign up Tests", () => {
     });
 
     it("I should see a confirmation alert message 'Account created successfully'", async () => {
-      await browser.waitUntil(
-        async () =>
-          (await browser.getAlertText()) === "Account created successfully",
-        { timeout: 5000 }
-      );
       const alertText = await browser.getAlertText();
       expect(alertText).to.equal("Account created successfully");
     });
