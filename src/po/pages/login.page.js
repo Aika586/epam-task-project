@@ -1,7 +1,7 @@
-import { $,$$,browser } from "@wdio/globals"
+import { $, $$} from "@wdio/globals";
+import Page from "./page";
 
-export class LoginPage {
-
+export class LoginPage extends Page {
   get inputUsername() {
     return $("#email");
   }
@@ -14,13 +14,13 @@ export class LoginPage {
     return $("//form//input[@type='submit']");
   }
 
-   get loginErrorMessage() {
+  get loginErrorMessage() {
     return $("//div[@data-test='login-error']");
   }
   get missingFieldError() {
-    return  $$("//div[@data-test]");
+    return $$("//div[@data-test]");
   }
-   get invalidEmailError() {
+  get invalidEmailError() {
     return $("//div[@data-test='email-error']//div");
   }
 
@@ -30,9 +30,8 @@ export class LoginPage {
     await this.btnSubmit.click();
   }
 
-  
   async open() {
-    await browser.url("/auth/login");
+    await super.open("/auth/login");
   }
 }
 

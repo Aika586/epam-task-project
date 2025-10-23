@@ -1,4 +1,4 @@
-import LoginPage from "../pageobjects/login.page";
+import LoginPage from "../po/pages/login.page";
 import { user,invalidFormat,invalidUser } from "../../userData";
 import { browser } from "@wdio/globals";
 import * as chai from "chai";

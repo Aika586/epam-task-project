@@ -1,7 +1,8 @@
-import { $, browser } from "@wdio/globals";
-import { user } from "../../userData";
+import { $} from "@wdio/globals";
+import { user } from "../../../userData";
+import Page from "./page";
 
-export class SignUpPage {
+export class SignUpPage extends Page {
   get firstname() {
     return $("#first_name");
   }
@@ -72,8 +73,9 @@ export class SignUpPage {
   await this.password.setValue(isEmptyFields ? "" : password);
   await this.btnSubmit.click();
 }
+
   async open() {
-    await browser.url("/auth/register");
+    await super.open("/auth/register");
   }
 }
 
