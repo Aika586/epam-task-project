@@ -1,9 +1,6 @@
-import SignUpPage from "../pageobjects/signUp.page";
-import { browser, $$, $ } from "@wdio/globals";
-import * as chai from "chai";
-const { expect } = chai;
-const { assert } = chai;
-chai.should();
+import { browser, $$, expect } from "@wdio/globals";
+import { user, invalidUser } from "../../userData";
+import SignUpPage from "../po/pages/signUp.page";
 
 describe("Sign up Tests", () => {
   beforeEach(async () => {
@@ -12,69 +9,71 @@ describe("Sign up Tests", () => {
 
   describe("Successful sign up", () => {
     beforeEach(async () => {
-      await SignUpPage.signUp("aika18@gmail.com", "Aika_1989");
+      await SignUpPage.signUp(user.email, user.password);
     });
 
     it("I should see a confirmation alert message 'Account created successfully'", async () => {
       const alertText = await browser.getAlertText();
-      expect(alertText).to.equal("Account created successfully");
+      await expect(alertText).toEqual("Account created successfully");
+      await browser.acceptAlert();
     });
 
     it("I should be redirected to the login page", async () => {
-      const url = await browser.getUrl();
-      assert.include(url, "login");
+      await expect(browser).toHaveUrl(expect.stringContaining("login"));
     });
 
     it("my account should be stored in the database", async () => {
       // Mock implementation
-      assert.isTrue(
-        true,
-        "Account stored in database check (mock implementation)"
-      );
+      // Normally, should call a backend API to verify this.
+      console.log("Account stored in database check (mock implementation)");
     });
   });
 
   describe("Invalid email format", () => {
     beforeEach(async () => {
-      await SignUpPage.signUp("not-an-email", "Password1235!");
+      await SignUpPage.signUp(invalidUser.email, invalidUser.password);
     });
 
     it("I should see an invalid email format error element", async () => {
       const alertElement = await SignUpPage.invalidEmailError;
-      const displayed = await alertElement.isDisplayed();
-      expect(displayed).to.be.true;
+      await expect(alertElement).toBeDisplayed();
     });
 
     it("the email field should be highlighted", async () => {
-      const emailField = await $("#email");
-      const className = await emailField.getAttribute("class");
-      expect(className).to.include("is-invalid");
+      const emailField = await SignUpPage.email;
+      await expect(emailField).toHaveElementClass(
+        expect.stringContaining("is-invalid")
+      );
     });
 
     it("my account should not be created", async () => {
-      assert.isTrue(true, "Account existence check in database (mocked)");
+      // Mock implementation: Check if the invalid email prevented account creation.
+      console.log(
+        "Account existence check in database (mocked). Ensure backend logic validates email format."
+      );
     });
   });
 
   describe("Email is already registered", () => {
     beforeEach(async () => {
-      await SignUpPage.signUp("aika18@gmail.com", "Aika_1989");
+      await SignUpPage.signUp(user.email, user.password);
     });
 
     it("I should see a duplicate account error message", async () => {
       const errorMessageElement = await SignUpPage.dublicateEmailError;
-      const displayed = await errorMessageElement.isDisplayed();
-      expect(displayed).to.be.true;
+      await expect(errorMessageElement).toBeDisplayed();
+      await expect(errorMessageElement).toHaveText(
+        "A customer with this email address already exists."
+      );
     });
 
     it("should remain on the sign-up page", async () => {
-      const url = await browser.getUrl();
-      url.should.contain("register");
+      await expect(browser).toHaveUrl(expect.stringContaining("register"));
     });
 
     it("my session should not be created", async () => {
       const sessionCookie = await browser.getCookies(["session_id"]);
-      expect(sessionCookie.length).to.equal(0);
+      await expect(sessionCookie.length).toBe(0);
     });
   });
 
@@ -83,26 +82,25 @@ describe("Sign up Tests", () => {
       await SignUpPage.signUp("", "", true);
     });
 
-    it("I should see error elements", async () => {
-      const errorMessages = await $$(SignUpPage.missingFieldError);
-      expect(errorMessages.length).to.be.greaterThan(0);
-      for (let errorMessage of errorMessages) {
-        const displayed = await errorMessage.isDisplayed();
-        assert.isTrue(displayed);
+    it("I should see  an error elements", async () => {
+      const errorMessageElements = await $$(SignUpPage.missingFieldError);
+      expect(errorMessageElements.length).toBeGreaterThan(0);
+      for (let errorMessage of errorMessageElements) {
+        await expect(errorMessage).toBeDisplayed();
       }
     });
 
     it("the missing fields should be highlighted", async () => {
       const fields = await $$(SignUpPage.allInputs);
       for (const field of fields) {
-        const className = await field.getAttribute("class");
-        expect(className).to.include("is-invalid");
+        await expect(field).toHaveElementClass(
+          expect.stringContaining("is-invalid")
+        );
       }
     });
 
     it("I should remain on the signup page", async () => {
-      const url = await browser.getUrl();
-      url.should.contain("register");
+      await expect(browser).toHaveUrl(expect.stringContaining("register"));
     });
   });
 });
