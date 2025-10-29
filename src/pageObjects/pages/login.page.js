@@ -1,7 +1,8 @@
-import { $, $$} from "@wdio/globals";
-import Page from "./page";
+import { $, $$ } from "@wdio/globals";
+import BasePage from "./basePage";
 
-export class LoginPage extends Page {
+export class LoginPage extends BasePage {
+  
   get inputUsername() {
     return $("#email");
   }
@@ -17,9 +18,11 @@ export class LoginPage extends Page {
   get loginErrorMessage() {
     return $("//div[@data-test='login-error']");
   }
+
   get missingFieldError() {
     return $$("//div[@data-test]");
   }
+
   get invalidEmailError() {
     return $("//div[@data-test='email-error']//div");
   }
