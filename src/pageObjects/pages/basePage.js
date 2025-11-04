@@ -1,7 +1,12 @@
 import { browser } from "@wdio/globals";
 
 export default class BasePage {
-  async open(path) {
-    await browser.url(path);
+  constructor(path) {
+    this.path = path;
+  }
+
+  async open() {
+    if (!this.path) throw new Error("No path specified for this page!");
+    await browser.url(this.path);
   }
 }

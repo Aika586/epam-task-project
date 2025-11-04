@@ -3,6 +3,9 @@ import { user } from "../../data/userData";
 import BasePage from "./basePage";
 
 export class SignUpPage extends BasePage {
+   constructor() {
+    super("/auth/register");
+  }
 
   get firstname() {
     return $("#first_name");
@@ -95,10 +98,6 @@ export class SignUpPage extends BasePage {
     // Submit Form
     await this.btnSubmit.click();
     
-  }
-
-  async open() {
-    await super.open("/auth/register");
   }
 }
 

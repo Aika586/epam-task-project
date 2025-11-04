@@ -2,6 +2,9 @@ import { $, $$ } from "@wdio/globals";
 import BasePage from "./basePage";
 
 export class LoginPage extends BasePage {
+   constructor() {
+    super("/auth/login");
+  }
   
   get inputUsername() {
     return $("#email");
@@ -31,10 +34,6 @@ export class LoginPage extends BasePage {
     await this.inputUsername.setValue(email);
     await this.inputPassword.setValue(password);
     await this.btnSubmit.click();
-  }
-
-  async open() {
-    await super.open("/auth/login");
   }
 }
 
