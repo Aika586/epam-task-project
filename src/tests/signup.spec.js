@@ -7,7 +7,7 @@ describe("Sign up Tests", () => {
   describe("Successful sign up", () => {
 
     before(async () => {
-       await SignUpPage.open();
+      await SignUpPage.open();
       await SignUpPage.signUp(user.email, user.password);
     });
 
@@ -26,7 +26,7 @@ describe("Sign up Tests", () => {
   describe("Invalid email format", () => {
 
     before(async () => {
-       await SignUpPage.open();
+      await SignUpPage.open();
       await SignUpPage.signUp(invalidUser.email, invalidUser.password);
     });
 
@@ -45,7 +45,7 @@ describe("Sign up Tests", () => {
   describe("Email already registered", () => {
 
     before(async () => {
-       await SignUpPage.open();
+      await SignUpPage.open();
       await SignUpPage.signUp(user.email, user.password);
     });
 
@@ -67,7 +67,7 @@ describe("Sign up Tests", () => {
   describe("Missing required fields", () => {
 
     before(async () => {
-       await SignUpPage.open();
+      await SignUpPage.open();
       await SignUpPage.signUp("", "", true);
     });
 

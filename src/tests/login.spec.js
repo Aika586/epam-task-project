@@ -48,7 +48,7 @@ describe("Login Tests", () => {
 
   describe("Invalid credentials", () => {
     before(async () => {
-      LoginPage.open();
+      await LoginPage.open();
       await LoginPage.login(invalidUser.email, invalidUser.password);
     });
 
@@ -66,7 +66,7 @@ describe("Login Tests", () => {
 
   describe("Invalid email format", () => {
     before(async () => {
-      LoginPage.open();
+      await LoginPage.open();
       await LoginPage.login(invalidFormat.email, invalidFormat.password);
     });
 
