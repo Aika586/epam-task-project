@@ -8,10 +8,10 @@ describe("Sign up Tests", () => {
 
     before(async () => {
       await SignUpPage.open();
-      await SignUpPage.signUp(user.email, user.password);
     });
-
+    
     it("Happy sign up", async () => {
+      await SignUpPage.signUp(user.email, user.password);
       const alertText = await browser.getAlertText();
       await expect(alertText).toEqual("Account created successfully");
       await browser.acceptAlert();
@@ -24,10 +24,10 @@ describe("Sign up Tests", () => {
 
     before(async () => {
       await SignUpPage.open();
-      await SignUpPage.signUp(invalidUser.email, invalidUser.password);
     });
-
+    
     it("sign up with invalid email format", async () => {
+      await SignUpPage.signUp(invalidUser.email, invalidUser.password);
       const alertElement = await SignUpPage.invalidEmailError;
       const emailField = await SignUpPage.email;
       await expect(alertElement).toBeDisplayed();
@@ -40,10 +40,10 @@ describe("Sign up Tests", () => {
 
     before(async () => {
       await SignUpPage.open();
-      await SignUpPage.signUp(user.email, user.password);
     });
-
+    
     it("sign up with email already exists", async () => {
+      await SignUpPage.signUp(user.email, user.password);
       const sessionCookie = await browser.getCookies(["session_id"]);
       const errorMessageElement = await SignUpPage.dublicateEmailError;
       await expect(errorMessageElement).toBeDisplayed();
@@ -59,10 +59,10 @@ describe("Sign up Tests", () => {
 
     before(async () => {
       await SignUpPage.open();
-      await SignUpPage.signUp("", "", true);
     });
-
+    
     it("sign up with missing fields", async () => {
+      await SignUpPage.signUp("", "", true);
       const errorMessageElements = await SignUpPage.missingFieldError;
       const fields = await SignUpPage.allInputs;
       for (const el of errorMessageElements) {
