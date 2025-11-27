@@ -1,5 +1,5 @@
-import LoginPage from "../pageObjects/pages/login.page";
-import { user, invalidFormat, invalidUser } from "../data/userData";
+import LoginPage from "../../pageObjects/pages/login.page";
+import { user, invalidFormat, invalidUser } from "../../data/userData";
 import { browser, expect } from "@wdio/globals";
 
 describe("Login Tests", () => {

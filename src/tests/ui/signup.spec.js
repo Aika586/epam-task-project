@@ -1,6 +1,6 @@
 import { browser, expect } from "@wdio/globals";
-import { user, invalidUser } from "../data/userData";
-import SignUpPage from "../pageObjects/pages/signUp.page";
+import { user, invalidUser } from "../../data/userData";
+import SignUpPage from "../../pageObjects/pages/signUp.page";
 
 describe("Sign up Tests", () => {
   
