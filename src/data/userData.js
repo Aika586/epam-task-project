@@ -14,7 +14,7 @@ export const user={
 
 export const invalidUser={
   email:'aika@gmail.com',
-  password:"WrongPasswor!"
+  password:"WrongPassword!"
 }
  export const invalidFormat={
   email:'invalidUser',
