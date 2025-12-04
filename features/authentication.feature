@@ -56,6 +56,3 @@ Feature: Authentication
     When I login with an invalid email address
     Then I should see an email invalid format error message "Email format is invalid"
     And I should remain on the signIn page
-
-
-
