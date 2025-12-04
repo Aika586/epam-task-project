@@ -1,17 +1,17 @@
-import { $, $$ } from "@wdio/globals";
-import BasePage from "./basePage";
+import { $, $$ } from '@wdio/globals';
+import BasePage from './basePage';
 
 export class LoginPage extends BasePage {
-   constructor() {
-    super("/auth/login");
+  constructor() {
+    super('/auth/login');
   }
-  
+
   get inputUsername() {
-    return $("#email");
+    return $('#email');
   }
 
   get inputPassword() {
-    return $("#password");
+    return $('#password');
   }
 
   get btnSubmit() {
@@ -23,7 +23,7 @@ export class LoginPage extends BasePage {
   }
 
   get missingFieldError() {
-    return $$("//div[@data-test]");
+    return $$('//div[@data-test]');
   }
 
   get invalidEmailError() {

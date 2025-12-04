@@ -1,5 +1,5 @@
-import  allure from "allure-commandline";
-import { browser } from "@wdio/globals";
+import allure from 'allure-commandline';
+import { browser } from '@wdio/globals';
 
 export const config = {
   //
@@ -7,7 +7,7 @@ export const config = {
   // Runner Configuration
   // ====================
   // WebdriverIO supports running e2e tests as well as unit and component tests.
-  runner: "local",
+  runner: 'local',
   //
   // ==================
   // Specify Test Files
@@ -23,7 +23,7 @@ export const config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["../tests/ui/*.js"],
+  specs: ['../tests/ui/*.js'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -50,24 +50,24 @@ export const config = {
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
-  services: ["selenium-standalone"],
+  services: ['selenium-standalone'],
   capabilities: [
     {
-      browserName: "chrome",
-      "goog:chromeOptions": {
-        args: ["--headless", "--disable-gpu"],
+      browserName: 'chrome',
+      'goog:chromeOptions': {
+        args: ['--headless', '--disable-gpu'],
       },
       maxInstances: 2,
     },
     {
-      browserName: "firefox",
-      "moz:firefoxOptions": {
-        args: ["-headless"],
+      browserName: 'firefox',
+      'moz:firefoxOptions': {
+        args: ['-headless'],
       },
       maxInstances: 2,
     },
     {
-      browserName: "safari",
+      browserName: 'safari',
       maxInstances: 2, // Safari doesn’t always support headless well
     },
   ],
@@ -79,7 +79,7 @@ export const config = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "error",
+  logLevel: 'error',
   //
   // Set specific log levels per logger
   // loggers:
@@ -103,7 +103,7 @@ export const config = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "https://practicesoftwaretesting.com",
+  baseUrl: 'https://practicesoftwaretesting.com',
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -127,7 +127,7 @@ export const config = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: "mocha",
+  framework: 'mocha',
 
   //
   // The number of times to retry the entire specfile when it fails as a whole
@@ -143,30 +143,30 @@ export const config = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
-    "spec",
+    'spec',
     [
-      "allure",
+      'allure',
       {
-        outputDir: "allure-results",
+        outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
       },
     ],
   ],
   onComplete: function () {
-    const reportError = new Error("Could not generate Allure report");
-    const generation = allure(["generate", "allure-results", "--clean"]);
+    const reportError = new Error('Could not generate Allure report');
+    const generation = allure(['generate', 'allure-results', '--clean']);
     return new Promise((resolve, reject) => {
       const generationTimeout = setTimeout(() => reject(reportError), 5000);
 
-      generation.on("exit", function (exitCode) {
+      generation.on('exit', function (exitCode) {
         clearTimeout(generationTimeout);
 
         if (exitCode !== 0) {
           return reject(reportError);
         }
 
-        console.log("Allure report successfully generated");
+        console.log('Allure report successfully generated');
         resolve();
       });
     });
@@ -185,7 +185,7 @@ export const config = {
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
   mochaOpts: {
-    ui: "bdd",
+    ui: 'bdd',
     timeout: 60000,
     retries: 2,
   },

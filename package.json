@@ -6,11 +6,11 @@
   "scripts": {
     "test": "cucumber-js",
     "lint": "eslint . --ext .js,.ts",
+    "format": "prettier --write .",
     "wdio": "wdio run ./src/configs/wdio.conf.js",
     "test:api": "mocha src/tests/api",
     "test:all": "npm run test:api && npm run wdio",
     "allure:report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
-   
   },
   "keywords": [],
   "author": "",
@@ -27,10 +27,13 @@
     "allure-commandline": "^2.34.1",
     "chai": "^6.2.0",
     "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-cucumber": "^2.0.0",
+    "eslint-plugin-prettier": "^5.5.4",
     "globals": "^16.4.0",
     "mocha": "^5.2.0",
     "mocha-allure2-reporter": "^0.0.3",
+    "prettier": "^3.7.4",
     "wdio-selenium-standalone-service": "^0.0.12"
   },
   "dependencies": {

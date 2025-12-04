@@ -1,54 +1,54 @@
-import { $ } from "@wdio/globals";
-import { user } from "../../data/userData";
-import BasePage from "./basePage";
+import { $ } from '@wdio/globals';
+import { user } from '../../data/userData';
+import BasePage from './basePage';
 
 export class SignUpPage extends BasePage {
-   constructor() {
-    super("/auth/register");
+  constructor() {
+    super('/auth/register');
   }
 
   get firstname() {
-    return $("#first_name");
+    return $('#first_name');
   }
 
   get lastname() {
-    return $("#last_name");
+    return $('#last_name');
   }
 
   get dob() {
-    return $("#dob");
+    return $('#dob');
   }
 
   get street() {
-    return $("#street");
+    return $('#street');
   }
 
   get postalcode() {
-    return $("#postal_code");
+    return $('#postal_code');
   }
 
   get city() {
-    return $("#city");
+    return $('#city');
   }
 
   get state() {
-    return $("#state");
+    return $('#state');
   }
 
   get country() {
-    return $("#country");
+    return $('#country');
   }
 
   get phone() {
-    return $("#phone");
+    return $('#phone');
   }
 
   get email() {
-    return $("#email");
+    return $('#email');
   }
 
   get password() {
-    return $("#password");
+    return $('#password');
   }
 
   get btnSubmit() {
@@ -56,7 +56,7 @@ export class SignUpPage extends BasePage {
   }
 
   get missingFieldError() {
-    return "//div[@data-test]";
+    return '//div[@data-test]';
   }
 
   get invalidEmailError() {
@@ -68,36 +68,34 @@ export class SignUpPage extends BasePage {
   }
 
   get allInputs() {
-    return "//input";
+    return '//input';
   }
 
   async signUp(email, password, isEmptyFields = false) {
-
     // Personal Information
-    await this.firstname.setValue(isEmptyFields ? "" : user.firstName);
-    await this.lastname.setValue(isEmptyFields ? "" : user.lastName);
-    await this.dob.setValue(isEmptyFields ? "" : user.dob);
+    await this.firstname.setValue(isEmptyFields ? '' : user.firstName);
+    await this.lastname.setValue(isEmptyFields ? '' : user.lastName);
+    await this.dob.setValue(isEmptyFields ? '' : user.dob);
 
     // Address Information
-    await this.street.setValue(isEmptyFields ? "" : user.street);
-    await this.postalcode.setValue(isEmptyFields ? "" : user.postalCode);
-    await this.city.setValue(isEmptyFields ? "" : user.city);
-    await this.state.setValue(isEmptyFields ? "" : user.state);
+    await this.street.setValue(isEmptyFields ? '' : user.street);
+    await this.postalcode.setValue(isEmptyFields ? '' : user.postalCode);
+    await this.city.setValue(isEmptyFields ? '' : user.city);
+    await this.state.setValue(isEmptyFields ? '' : user.state);
 
     if (!isEmptyFields) {
       await this.country.selectByVisibleText(user.country);
     }
 
     // Contact Information
-    await this.phone.setValue(isEmptyFields ? "" : user.phone);
+    await this.phone.setValue(isEmptyFields ? '' : user.phone);
 
     // Credentials
-    await this.email.setValue(isEmptyFields ? "" : email);
-    await this.password.setValue(isEmptyFields ? "" : password);
+    await this.email.setValue(isEmptyFields ? '' : email);
+    await this.password.setValue(isEmptyFields ? '' : password);
 
     // Submit Form
     await this.btnSubmit.click();
-    
   }
 }
 
