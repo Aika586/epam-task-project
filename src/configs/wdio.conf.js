@@ -1,5 +1,10 @@
 import allure from 'allure-commandline';
 import { browser } from '@wdio/globals';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { truncate } from 'fs';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const config = {
   //
@@ -22,8 +27,8 @@ export const config = {
   //
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
-  //
-  specs: ['../tests/ui/*.js'],
+  //')],
+  specs: [path.join(__dirname, '..', 'BDD', 'features', '*.feature')],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -65,11 +70,11 @@ export const config = {
         args: ['-headless'],
       },
       maxInstances: 2,
-    },
-    {
-      browserName: 'safari',
-      maxInstances: 2, // Safari doesn’t always support headless well
-    },
+    }
+  //  {
+  //     browserName: 'safari',
+  //     maxInstances: 2, // Safari doesn’t always support headless well
+  //   }, 
   ],
 
   //
@@ -127,7 +132,7 @@ export const config = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: 'mocha',
+  framework: 'cucumber',
 
   //
   // The number of times to retry the entire specfile when it fails as a whole
@@ -150,6 +155,7 @@ export const config = {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
+        useCucumberStepReporter:true,
       },
     ],
   ],
@@ -172,23 +178,41 @@ export const config = {
     });
   },
 
-  afterTest: async function (
-    test,
-    context,
-    { error, result, duration, passed, retries }
-  ) {
-    if (error) {
-      await browser.takeScreenshot();
-    }
-  },
+afterStep: async function (step, scenario, { error, duration, passed }, context) {
+  if (error) {
+    await browser.takeScreenshot();
+  }
+},
 
-  // Options to be passed to Mocha.
-  // See the full list at http://mochajs.org/
-  mochaOpts: {
-    ui: 'bdd',
-    timeout: 60000,
-    retries: 2,
-  },
+  // Options to be passed to Cucumber.
+  // See the full list at https://github.com/cucumber/cucumber-js
+  cucumberOpts: {
+        // <string[]> (file/dir) require files before executing features
+      import: [path.join(__dirname, '..', 'BDD', 'step-definitions','*.js')],
+        // <boolean> show full backtrace for errors
+        backtrace: false,
+        // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
+        requireModule: [],
+        // <boolean> invoke formatters without executing steps
+        dryRun: false,
+        // <boolean> abort the run on first failure
+        failFast: false,
+        // <string[]> Only execute the scenarios with name matching the expression (repeatable).
+        name: [],
+        // <boolean> hide step definition snippets for pending steps
+        snippets: true,
+        // <boolean> hide source uris
+        source: true,
+        // <boolean> fail if there are any undefined or pending steps
+        strict: false,
+        // <string> (expression) only execute the features or scenarios with tags matching the expression
+        tag: '',
+        // <number> timeout for step definitions
+        timeout: 60000,
+        // <boolean> Enable this config to treat undefined definitions as warnings.
+        ignoreUndefinedDefinitions: false
+    },
+
 
   //
   // =====

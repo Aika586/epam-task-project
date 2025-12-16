@@ -59,6 +59,7 @@ export class SignUpPage extends BasePage {
     return '//div[@data-test]';
   }
 
+
   get invalidEmailError() {
     return $("//div[@data-test='email-error']");
   }

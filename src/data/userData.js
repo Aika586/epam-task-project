@@ -20,3 +20,10 @@ export const invalidFormat = {
   email: 'invalidUser',
   password: 'Aikokul_25!',
 };
+
+export const duplicateUser = {
+  email: 'urmataika18@gmail.com',
+  password: 'Aikokul_89',
+};
+
+
