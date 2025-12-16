@@ -1,12 +1,10 @@
-
 # Gherkin Test Scenarios Repository
 
 This repository contains Gherkin scenarios written to test the functionality of the [Practice Software Testing](https://practicesoftwaretesting.com/) website. The scenarios are written in **Gherkin syntax** and describe various behaviors and features of the application in a behavior-driven development (**BDD**) framework.
 
-
 ## 📘 Project Description
 
-This project is designed to document test cases for the **Practice Software Testing** website using **Gherkin syntax**. Gherkin is a domain-specific language for describing application behavior in BDD frameworks like `Cucumber`. 
+This project is designed to document test cases for the **Practice Software Testing** website using **Gherkin syntax**. Gherkin is a domain-specific language for describing application behavior in BDD frameworks like `Cucumber`.
 
 ---
 
@@ -33,6 +31,7 @@ This repository includes ten (10) Gherkin test cases covering essential function
 Gherkin syntax is organized as follows:
 
 ### Basic Structure:
+
 - **Scenario:** Describes the feature or functionality being tested.
 - **Given:** Defines the initial state or precondition.
 - **When:** Specifies the action/events performed.

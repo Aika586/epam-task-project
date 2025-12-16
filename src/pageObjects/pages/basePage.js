@@ -1,4 +1,4 @@
-import { browser } from "@wdio/globals";
+import { browser } from '@wdio/globals';
 
 export default class BasePage {
   constructor(path) {
@@ -6,7 +6,7 @@ export default class BasePage {
   }
 
   async open() {
-    if (!this.path) throw new Error("No path specified for this page!");
+    if (!this.path) throw new Error('No path specified for this page!');
     await browser.url(this.path);
   }
 }
